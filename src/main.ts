@@ -8,5 +8,5 @@ var level = new Level(10, 8);
 
 var gameController = new GameController(renderer, element, level);
 
-gameController.initialize();
+gameController.bootUp();
 gameController.startGame();
