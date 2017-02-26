@@ -4,6 +4,8 @@ import {Command} from "./../controller/Command";
 import {MainState} from "../pojo/MainState";
 import {LevelUtil} from "../pojo/util/LevelUtil";
 import {MainStateUtil} from "../pojo/util/MainStateUtil";
+import {KeyboardBindings} from "../controller/KeyboardBindings";
+import {MapViewController} from "../controller/MapViewController";
 
 export class MooGame {
   private mainState: MainState;
@@ -28,7 +30,10 @@ export class MooGame {
   }
 
   handleKeypress(keyPress: string) {
-    this.doRender(this.mainState, this.outputElement);
+    var command = KeyboardBindings[keyPress];
+    if (command !== null && command !== undefined) {
+      this.handleCommand(command);
+    }
   }
 
   private doRender(mainState: MainState, outputElement: HTMLElement) {
@@ -53,5 +58,10 @@ export class MooGame {
     this.mainState.currentLevelId = level.id;
     this.mainState.playerMonsterId = playerId;
     this.mainState.levels[level.id] = level;
+  }
+
+  private handleCommand(command:Command):void {
+    MapViewController.handleCommand(command, this.mainState);
+    this.doRender(this.mainState, this.outputElement);
   }
 }

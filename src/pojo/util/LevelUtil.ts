@@ -5,7 +5,6 @@ export class LevelUtil {
   private static nextLevelId = 1;
 
   public static create(height:number, width:number): Level {
-    debugger;
     var level: Level = {
       id: this.nextLevelId,
       tiles: {}

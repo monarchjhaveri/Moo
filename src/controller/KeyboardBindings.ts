@@ -1,13 +1,13 @@
 import {Command} from "./Command";
 
 export const KeyboardBindings: {[key:string]: Command} = {
-  "8": Command.N,
-  "9": Command.NE,
-  "6": Command.E,
-  "3": Command.SE,
-  "2": Command.S,
-  "1": Command.SW,
-  "4": Command.W,
-  "7": Command.NW,
-  "5": Command.REST
+  "Numpad8": Command.N,
+  "Numpad9": Command.NE,
+  "Numpad6": Command.E,
+  "Numpad3": Command.SE,
+  "Numpad2": Command.S,
+  "Numpad1": Command.SW,
+  "Numpad4": Command.W,
+  "Numpad7": Command.NW,
+  "Numpad5": Command.REST
 };
