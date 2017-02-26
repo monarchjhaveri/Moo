@@ -8,8 +8,9 @@ import {Tile} from "../pojo/Tile";
 
 export class AsciiRenderer implements  Renderer{
   initialize(output: HTMLElement) {
-    output.style.setProperty("letter-spacing", "6px");
-    output.style.setProperty("font-size", "12px");
+    var fontSize = 33;
+    output.style.setProperty("letter-spacing", fontSize/2 + "px");
+    output.style.setProperty("font-size", fontSize + "px");
   }
 
   beforeRender(output: HTMLElement) {
@@ -37,7 +38,7 @@ export class AsciiRenderer implements  Renderer{
 
       var charToPrint:string = null;
       if (tile.monster != null) {
-        charToPrint = "@";
+        charToPrint = "<span style='color: goldenrod'>@</span>";
       } else {
         charToPrint = TileSetMap[tile.type];
       }

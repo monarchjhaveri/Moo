@@ -47,7 +47,7 @@ export class MooGame {
 
     this.mainState = MainStateUtil.create();
 
-    var level = LevelUtil.create(10, 8);
+    var level = LevelUtil.create(20, 20);
 
     level.tiles[1][1].monster = {
       id: playerId,
