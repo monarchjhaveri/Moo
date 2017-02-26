@@ -1,14 +1,13 @@
-import { Level } from "./state/Level";
 import { AsciiRenderer } from "./view/AsciiRenderer";
 import { MooGame } from "./init/MooGame";
 import {KeyPressStream} from "./controller/CommandPressStream";
-import {MainState} from "./state/MainState";
+import {MainState} from "./pojo/MainState";
+import {MainStateUtil} from "./pojo/util/MainStateUtil";
 
 var renderer = new AsciiRenderer();
 var element = document.getElementById("output");
-var mainState = new MainState();
-var commandPressStream = new KeyPressStream();
+var keyPressStream = new KeyPressStream();
 
-var gameController = new MooGame(renderer, element, commandPressStream, mainState);
+var gameController = new MooGame(renderer, element, keyPressStream);
 
 gameController.bootUp();

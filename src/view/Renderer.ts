@@ -1,5 +1,4 @@
-import {Level} from "../state/Level";
-import {MainState} from "../state/MainState";
+import {MainState} from "../pojo/MainState";
 
 export interface Renderer {
   initialize(output: HTMLElement): void;

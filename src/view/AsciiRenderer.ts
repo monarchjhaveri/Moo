@@ -1,7 +1,10 @@
-import { Level } from "../state/Level";
 import {TileSetMap} from "./TileSetMap";
-import {MainState} from "../state/MainState";
 import {Renderer} from "./Renderer";
+import {MainState} from "../pojo/MainState";
+import {Level} from "../pojo/Level";
+import {MainStateWrapper} from "../pojo/wrapper/MainStateWrapper";
+import {LevelWrapper} from "../pojo/wrapper/LevelWrapper";
+import {Tile} from "../pojo/Tile";
 
 export class AsciiRenderer implements  Renderer{
   initialize(output: HTMLElement) {
@@ -14,9 +17,10 @@ export class AsciiRenderer implements  Renderer{
   }
 
   render(mainState: MainState, output: HTMLElement) {
+    var wrapper = new MainStateWrapper(mainState);
     var characterBuffer: string[][] = [];
 
-    var level = mainState.currentLevel;
+    var level = wrapper.getCurrentLevel();
     AsciiRenderer.paintFloor(characterBuffer, level);
     AsciiRenderer.printBuffer(characterBuffer, output);
   }
@@ -26,19 +30,20 @@ export class AsciiRenderer implements  Renderer{
   }
 
   private static paintFloor(characterBuffer:string[][], level:Level) {
-    for (var t = 0; t < level.tiles.length; t++) {
-      characterBuffer[t] = [];
+    var wrapper = new LevelWrapper(level);
 
-      for (var c = 0; c < level.tiles[t].length; c++) {
-        var tile = level.tiles[t][c];
+    wrapper.forEachTile((tile:Tile, y: number, x: number) => {
+      characterBuffer[y] = characterBuffer[y] || [];
 
-        if (tile.monster != null) {
-          characterBuffer[t][c] = "@";
-        } else {
-          characterBuffer[t][c] = TileSetMap[tile.type];
-        }
+      var charToPrint:string = null;
+      if (tile.monster != null) {
+        charToPrint = "@";
+      } else {
+        charToPrint = TileSetMap[tile.type];
       }
-    }
+
+      characterBuffer[y][x] = charToPrint;
+    });
   }
 
   private static printBuffer(characterBuffer:string[][], output:HTMLElement) {

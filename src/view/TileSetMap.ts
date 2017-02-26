@@ -1,4 +1,4 @@
-import {TileType} from "../world/TileType";
+import {TileType} from "../pojo/enum/TileType";
 
 var TileSetMap: {[tileType: number]: string} = {};
 
