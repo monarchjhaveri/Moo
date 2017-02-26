@@ -1,13 +1,11 @@
-import {TileType} from "./TileType";
-import {Tile} from "./Tile";
-import {Coords} from "./Coords";
-import {Monster} from "./monsters/Monster";
+import {TileType} from "./../world/TileType";
+import {Tile} from "./../world/Tile";
+import {Coords} from "./../world/Coords";
+import {Monster} from "./../world/monsters/Monster";
 
 export class Level {
   private _tiles: Tile[][];
   private _monsters: Monster[];
-  private _monsterPositions: {[id:number]: Coords};
-  private _monsterMovementOrder: number[]; // monster IDs
 
   constructor(
     private height:number,

@@ -1,7 +1,9 @@
-import { Level } from "../world/Level";
+import { Level } from "../state/Level";
 import {TileSetMap} from "./TileSetMap";
+import {MainState} from "../state/MainState";
+import {Renderer} from "./Renderer";
 
-export class AsciiRenderer {
+export class AsciiRenderer implements  Renderer{
   initialize(output: HTMLElement) {
     output.style.setProperty("letter-spacing", "6px");
     output.style.setProperty("font-size", "12px");
@@ -11,11 +13,16 @@ export class AsciiRenderer {
     output.innerHTML = "";
   }
 
-  render(level: Level, output: HTMLElement) {
+  render(mainState: MainState, output: HTMLElement) {
     var characterBuffer: string[][] = [];
 
+    var level = mainState.currentLevel;
     AsciiRenderer.paintFloor(characterBuffer, level);
     AsciiRenderer.printBuffer(characterBuffer, output);
+  }
+
+  afterRender(output: HTMLElement) {
+
   }
 
   private static paintFloor(characterBuffer:string[][], level:Level) {
@@ -24,7 +31,12 @@ export class AsciiRenderer {
 
       for (var c = 0; c < level.tiles[t].length; c++) {
         var tile = level.tiles[t][c];
-        characterBuffer[t][c] = TileSetMap[tile.type];
+
+        if (tile.monster != null) {
+          characterBuffer[t][c] = "@";
+        } else {
+          characterBuffer[t][c] = TileSetMap[tile.type];
+        }
       }
     }
   }

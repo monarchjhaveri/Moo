@@ -1,14 +1,14 @@
-import { Level } from "./world/Level";
+import { Level } from "./state/Level";
 import { AsciiRenderer } from "./view/AsciiRenderer";
-import {GameController} from "./controller/GameController";
-import {CommandPressStream} from "./controller/CommandPressStream";
+import { MooGame } from "./init/MooGame";
+import {KeyPressStream} from "./controller/CommandPressStream";
+import {MainState} from "./state/MainState";
 
 var renderer = new AsciiRenderer();
 var element = document.getElementById("output");
-var level = new Level(10, 8, 1);
-var commandPressStream = new CommandPressStream();
+var mainState = new MainState();
+var commandPressStream = new KeyPressStream();
 
-var gameController = new GameController(renderer, element, level, commandPressStream);
+var gameController = new MooGame(renderer, element, commandPressStream, mainState);
 
 gameController.bootUp();
-gameController.startGame();
